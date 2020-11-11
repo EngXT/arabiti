@@ -31,9 +31,14 @@ db.mongoose
     process.exit();
   });
 
+
 // simple route
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
   res.json({ message: "بسم الله الرحمن الرحيم" });
+});*/
+
+app.get('/',function(req,res){
+  res.sendFile(path.join(__dirname+'/commingSoon/index.html'));  
 });
 
 require("./app/routes/governorate.routes")(app);
