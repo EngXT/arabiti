@@ -1,6 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
+var fs = require('fs');
+
 
 const app = express();
 
@@ -17,6 +20,8 @@ app.use(bodyParser.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static(path.resolve(__dirname, 'public')));
 
 db.mongoose
   .connect(db.url, {
@@ -37,8 +42,10 @@ db.mongoose
   res.json({ message: "بسم الله الرحمن الرحيم" });
 });*/
 
-app.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/commingSoon/index.html'));  
+app.get('/', function (req, res) {
+  res.status(200);
+  res.type('text/html');
+  res.sendFile(path.resolve(__dirname, 'index.html'));  
 });
 
 require("./app/routes/governorate.routes")(app);
